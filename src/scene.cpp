@@ -52,6 +52,10 @@ void OurTestScene::Init()
 	m_quad = new QuadModel(m_dxdevice, m_dxdevice_context);
 	m_sponza = new OBJModel("assets/crytek-sponza/sponza.obj", m_dxdevice, m_dxdevice_context);
 	m_cube = new Cube(m_dxdevice, m_dxdevice_context);
+
+	m_sphere1 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
+	m_sphere2 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
+	m_sphere3 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
 }
 
 //
@@ -95,10 +99,24 @@ void OurTestScene::Update(
 		mat4f::rotation(fPI / 2, 0.0f, 1.0f, 0.0f) * // Rotate pi/2 radians (90 degrees) around y
 		mat4f::scaling(0.05f);						 // The scene is quite large so scale it down to 5%
 
-	m_cube_tramsform = mat4f::translation(0, 0, 0) *
+	m_cube_transform = mat4f::translation(0, 0, 0) *
 		mat4f::rotation(m_angle, 1.0f, 0.0f, 0.0f) *
 		mat4f::rotation(m_angle, 0.0f, 0.0f, 1.0f) *
 		mat4f::scaling(1.5, 1.5, 1.5);
+
+
+	m_sphere1_transform = mat4f::translation(0, 0, 0) *
+		mat4f::rotation(m_angle , 0.0f, 1.0f, 0.0f) *
+		mat4f::scaling(1, 1, 1);
+
+	m_sphere2_transform = m_sphere1_transform * mat4f::translation(3, 0, 0) *
+		mat4f::rotation(-m_angle, 1.0f, 0.0f, 0.0f) *
+		mat4f::scaling(0.5f, 0.5f, 0.5f);
+
+	m_sphere3_transform = m_sphere2_transform * mat4f::translation(2, 2, 0) *
+		mat4f::rotation(0, 0.0f, 0.0f, 0.0f) *
+		mat4f::scaling(0.5f, 0.5f, 0.5f);
+
 
 	// Increment the rotation angle.
 	m_angle += m_angular_velocity * dt;
@@ -125,16 +143,25 @@ void OurTestScene::Render()
 	m_view_matrix = m_camera->WorldToViewMatrix();
 	m_projection_matrix = m_camera->ProjectionMatrix();
 
-	// Load matrices + the Quad's transformation to the device and render it
+	//// Load matrices + the Quad's transformation to the device and render it
 	//UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);
 	//m_quad->Render();
 
-	// Load matrices + Sponza's transformation to the device and render it
-	UpdateTransformationBuffer(m_sponza_transform, m_view_matrix, m_projection_matrix);
-	m_sponza->Render();
+	//// Load matrices + Sponza's transformation to the device and render it
+	//UpdateTransformationBuffer(m_sponza_transform, m_view_matrix, m_projection_matrix);
+	//m_sponza->Render();
 
-	UpdateTransformationBuffer(m_cube_tramsform, m_view_matrix, m_projection_matrix);
-	m_cube->Render();
+	//UpdateTransformationBuffer(m_cube_transform, m_view_matrix, m_projection_matrix);
+	//m_cube->Render();
+
+	UpdateTransformationBuffer(m_sphere1_transform, m_view_matrix, m_projection_matrix);
+	m_sphere1->Render();
+
+	UpdateTransformationBuffer(m_sphere2_transform, m_view_matrix, m_projection_matrix);
+	m_sphere2->Render();
+
+	UpdateTransformationBuffer(m_sphere3_transform, m_view_matrix, m_projection_matrix);
+	m_sphere3->Render();
 }
 
 void OurTestScene::Release()
