@@ -113,7 +113,7 @@ void OurTestScene::Update(
 		mat4f::rotation(-m_angle, 1.0f, 0.0f, 0.0f) *
 		mat4f::scaling(0.5f, 0.5f, 0.5f);
 
-	m_sphere3_transform = m_sphere2_transform * mat4f::translation(2, 2, 0) *
+	m_sphere3_transform = m_sphere2_transform * mat4f::translation(0, 2, 0) *
 		mat4f::rotation(0, 0.0f, 0.0f, 0.0f) *
 		mat4f::scaling(0.5f, 0.5f, 0.5f);
 
