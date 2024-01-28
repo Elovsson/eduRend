@@ -42,6 +42,10 @@ public:
 	 * @brief Changes the camera aspect ratio.
 	 * @param[in] aspect_ratio New aspect ratio, calculate with width / height
 	*/
+
+	void Rotation(float x, float y);
+
+
 	inline void SetAspect(float aspect_ratio) noexcept { m_aspect_ratio = aspect_ratio; }
 
 	/**
@@ -73,6 +77,7 @@ private:
 	float m_far_plane;
 
 	linalg::vec3f m_position;
+	linalg::mat4f m_rotation;
 };
 
 #endif
