@@ -2,14 +2,13 @@
 
 using namespace linalg;
 
-void Camera::MoveTo(const vec4f& position) noexcept
+void Camera::MoveTo(const vec3f& position) noexcept
 {
 	m_position = position;
 }
 
-void Camera::Move(const vec4f& direction, float rotation_x) noexcept
+void Camera::Move(const vec3f& direction) noexcept
 {
-	mat4f temp = mat4f::rotation(0, -rotation_x,0);
 	m_position += direction;
 }
 

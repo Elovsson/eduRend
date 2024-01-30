@@ -46,7 +46,7 @@ void OurTestScene::Init()
 		500.0f);				// z-far plane (everything further will be clipped/removed)
 
 	// Move camera to (0,0,5)
-	m_camera->MoveTo({ 0, 0, 5, 1 });
+	m_camera->MoveTo({ 0, 0, 5});
 
 	// Create objects
 	m_quad = new QuadModel(m_dxdevice, m_dxdevice_context);
@@ -74,13 +74,13 @@ void OurTestScene::Update(
 
 	// Basic camera control
 	if (input_handler.IsKeyPressed(Keys::Up) || input_handler.IsKeyPressed(Keys::W))
-		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt, 0.0f } , mousedx);
+		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt});
 	if (input_handler.IsKeyPressed(Keys::Down) || input_handler.IsKeyPressed(Keys::S))
-		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt, 0.0f }, mousedx);
+		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt});
 	if (input_handler.IsKeyPressed(Keys::Right) || input_handler.IsKeyPressed(Keys::D))
-		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f, 0.0f }, mousedx);
+		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f});
 	if (input_handler.IsKeyPressed(Keys::Left) || input_handler.IsKeyPressed(Keys::A))
-		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f, 0.0f }, mousedx);
+		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f});
 
 
 	// Now set/update object transformations
