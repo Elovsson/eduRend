@@ -31,13 +31,13 @@ public:
 	 * @brief Move the camera to a new position
 	 * @param[in] position New position for the camera
 	*/
-	void MoveTo(const linalg::vec4f& position) noexcept;
+	void MoveTo(const linalg::vec3f& position) noexcept;
 
 	/**
 	 * @brief Move the camera along a vector
 	 * @param[in] direction Direction to move along
 	*/
-	void Move(const linalg::vec4f& direction, float rotation_x) noexcept;
+	void Move(const linalg::vec3f& direction) noexcept;
 
 	/**
 	 * @brief Changes the camera aspect ratio.
@@ -77,7 +77,7 @@ private:
 	float m_near_plane;
 	float m_far_plane;
 
-	linalg::vec4f m_position;
+	linalg::vec3f m_position;
 	linalg::mat4f m_rotation;
 };
 
