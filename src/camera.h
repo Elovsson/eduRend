@@ -37,7 +37,7 @@ public:
 	 * @brief Move the camera along a vector
 	 * @param[in] direction Direction to move along
 	*/
-	void Move(const linalg::vec4f& direction, const float& rotation_x) noexcept;
+	void Move(const linalg::vec4f& direction, float rotation_x) noexcept;
 
 	/**
 	 * @brief Changes the camera aspect ratio.

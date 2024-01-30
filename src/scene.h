@@ -109,7 +109,7 @@ class OurTestScene : public Scene
 	float m_angular_velocity = fPI / 2;	// ...and its velocity (radians/sec)
 	float m_camera_velocity = 5.0f;	// Camera movement velocity in units/s
 	float m_fps_cooldown = 0;
-	float mSensitivity = 0.001f;
+	float mSensitivity = 0.1f;
 	float mousedx = 0;
 	float mousedy = 0;
 	

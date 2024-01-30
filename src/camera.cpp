@@ -7,10 +7,10 @@ void Camera::MoveTo(const vec4f& position) noexcept
 	m_position = position;
 }
 
-void Camera::Move(const vec4f& direction, const float& rotation_x) noexcept
+void Camera::Move(const vec4f& direction, float rotation_x) noexcept
 {
-	mat4f temp = { 0.0f, - rotation_x, 0.0f, 0.0f };
-	m_position += temp * direction;
+	mat4f temp = mat4f::rotation(0, -rotation_x,0);
+	m_position += direction;
 }
 
 void Camera::Rotation(float x, float y) 
