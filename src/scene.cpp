@@ -46,7 +46,7 @@ void OurTestScene::Init()
 		500.0f);				// z-far plane (everything further will be clipped/removed)
 
 	// Move camera to (0,0,5)
-	m_camera->MoveTo({ 0, 0, 5 });
+	m_camera->MoveTo({ 0, 0, 5, 1 });
 
 	// Create objects
 	m_quad = new QuadModel(m_dxdevice, m_dxdevice_context);
@@ -66,21 +66,22 @@ void OurTestScene::Update(
 	float dt,
 	const InputHandler& input_handler)
 {
-	// Basic camera control
-	if (input_handler.IsKeyPressed(Keys::Up) || input_handler.IsKeyPressed(Keys::W))
-		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt });
-	if (input_handler.IsKeyPressed(Keys::Down) || input_handler.IsKeyPressed(Keys::S))
-		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt });
-	if (input_handler.IsKeyPressed(Keys::Right) || input_handler.IsKeyPressed(Keys::D))
-		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f });
-	if (input_handler.IsKeyPressed(Keys::Left) || input_handler.IsKeyPressed(Keys::A))
-		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f });
-
 
 	mousedx += input_handler.GetMouseDeltaX() * mSensitivity;
 	mousedy += input_handler.GetMouseDeltaY() * mSensitivity;
 
 	m_camera->Rotation(mousedx, mousedy);
+
+	// Basic camera control
+	if (input_handler.IsKeyPressed(Keys::Up) || input_handler.IsKeyPressed(Keys::W))
+		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt, 1.0f }, mousedx);
+	if (input_handler.IsKeyPressed(Keys::Down) || input_handler.IsKeyPressed(Keys::S))
+		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt, 1.0f }, mousedx);
+	if (input_handler.IsKeyPressed(Keys::Right) || input_handler.IsKeyPressed(Keys::D))
+		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f, 1.0f }, mousedx);
+	if (input_handler.IsKeyPressed(Keys::Left) || input_handler.IsKeyPressed(Keys::A))
+		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f, 1.0f }, mousedx);
+
 
 
 	// Now set/update object transformations
@@ -147,21 +148,21 @@ void OurTestScene::Render()
 	//UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);
 	//m_quad->Render();
 
-	//// Load matrices + Sponza's transformation to the device and render it
-	//UpdateTransformationBuffer(m_sponza_transform, m_view_matrix, m_projection_matrix);
-	//m_sponza->Render();
+	// Load matrices + Sponza's transformation to the device and render it
+	UpdateTransformationBuffer(m_sponza_transform, m_view_matrix, m_projection_matrix);
+	m_sponza->Render();
 
-	//UpdateTransformationBuffer(m_cube_transform, m_view_matrix, m_projection_matrix);
-	//m_cube->Render();
+	UpdateTransformationBuffer(m_cube_transform, m_view_matrix, m_projection_matrix);
+	m_cube->Render();
 
-	UpdateTransformationBuffer(m_sphere1_transform, m_view_matrix, m_projection_matrix);
-	m_sphere1->Render();
+	//UpdateTransformationBuffer(m_sphere1_transform, m_view_matrix, m_projection_matrix);
+	//m_sphere1->Render();
 
-	UpdateTransformationBuffer(m_sphere2_transform, m_view_matrix, m_projection_matrix);
-	m_sphere2->Render();
+	//UpdateTransformationBuffer(m_sphere2_transform, m_view_matrix, m_projection_matrix);
+	//m_sphere2->Render();
 
-	UpdateTransformationBuffer(m_sphere3_transform, m_view_matrix, m_projection_matrix);
-	m_sphere3->Render();
+	//UpdateTransformationBuffer(m_sphere3_transform, m_view_matrix, m_projection_matrix);
+	//m_sphere3->Render();
 }
 
 void OurTestScene::Release()

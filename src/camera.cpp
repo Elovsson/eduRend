@@ -2,14 +2,15 @@
 
 using namespace linalg;
 
-void Camera::MoveTo(const vec3f& position) noexcept
+void Camera::MoveTo(const vec4f& position) noexcept
 {
 	m_position = position;
 }
 
-void Camera::Move(const vec3f& direction) noexcept
+void Camera::Move(const vec4f& direction, const float& rotation_x) noexcept
 {
-	m_position += direction;
+	mat4f temp = { 0.0f, - rotation_x, 0.0f, 0.0f };
+	m_position += temp * direction;
 }
 
 void Camera::Rotation(float x, float y) 
@@ -26,7 +27,7 @@ mat4f Camera::WorldToViewMatrix() const noexcept
 	//		inverse(T(p)*R) = inverse(R)*inverse(T(p)) = transpose(R)*T(-p)
 	// Since now there is no rotation, this matrix is simply T(-p)
 
-	return m_rotation.inverse() * mat4f::translation(m_position).inverse();
+	return m_rotation.inverse() * mat4f::translation(m_position.x, m_position.y, m_position.z).inverse();
 }
 
 mat4f Camera::ProjectionMatrix() const noexcept
