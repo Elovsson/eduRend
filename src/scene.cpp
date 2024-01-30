@@ -70,17 +70,17 @@ void OurTestScene::Update(
 	mousedx += input_handler.GetMouseDeltaX() * mSensitivity * dt;
 	mousedy += input_handler.GetMouseDeltaY() * mSensitivity * dt;
 
-	m_camera->Rotation(mousedx, mousedx);
+	m_camera->Rotation(mousedx, mousedy);
 
 	// Basic camera control
 	if (input_handler.IsKeyPressed(Keys::Up) || input_handler.IsKeyPressed(Keys::W))
-		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt});
+		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt}, mousedx);
 	if (input_handler.IsKeyPressed(Keys::Down) || input_handler.IsKeyPressed(Keys::S))
-		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt});
+		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt}, mousedx);
 	if (input_handler.IsKeyPressed(Keys::Right) || input_handler.IsKeyPressed(Keys::D))
-		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f});
+		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f}, mousedx);
 	if (input_handler.IsKeyPressed(Keys::Left) || input_handler.IsKeyPressed(Keys::A))
-		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f});
+		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f}, mousedx);
 
 
 	// Now set/update object transformations
