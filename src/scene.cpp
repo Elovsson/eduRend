@@ -46,7 +46,7 @@ void OurTestScene::Init()
 		500.0f);				// z-far plane (everything further will be clipped/removed)
 
 	// Move camera to (0,0,5)
-	m_camera->MoveTo({ 0, 0, 5});
+	m_camera->MoveTo({ 0, 1, 5});
 
 	// Create objects
 	m_quad = new QuadModel(m_dxdevice, m_dxdevice_context);
@@ -56,6 +56,7 @@ void OurTestScene::Init()
 	m_sphere1 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
 	m_sphere2 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
 	m_sphere3 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
+
 }
 
 //
@@ -100,12 +101,12 @@ void OurTestScene::Update(
 		mat4f::scaling(0.05f);						 // The scene is quite large so scale it down to 5%
 
 	m_cube_transform = mat4f::translation(0, 0, 0) *
-		mat4f::rotation(m_angle, 1.0f, 0.0f, 0.0f) *
-		mat4f::rotation(m_angle, 0.0f, 0.0f, 1.0f) *
+		//mat4f::rotation(m_angle, 1.0f, 0.0f, 0.0f) *
+		//mat4f::rotation(m_angle, 0.0f, 0.0f, 1.0f) *
 		mat4f::scaling(1.5, 1.5, 1.5);
 
 
-	m_sphere1_transform = mat4f::translation(0, 0, 0) *
+	m_sphere1_transform = mat4f::translation(0, 0, -5) *
 		mat4f::rotation(m_angle , 0.0f, 1.0f, 0.0f) *
 		mat4f::scaling(1, 1, 1);
 
@@ -154,14 +155,14 @@ void OurTestScene::Render()
 	UpdateTransformationBuffer(m_cube_transform, m_view_matrix, m_projection_matrix);
 	m_cube->Render();
 
-	//UpdateTransformationBuffer(m_sphere1_transform, m_view_matrix, m_projection_matrix);
-	//m_sphere1->Render();
+	UpdateTransformationBuffer(m_sphere1_transform, m_view_matrix, m_projection_matrix);
+	m_sphere1->Render();
 
-	//UpdateTransformationBuffer(m_sphere2_transform, m_view_matrix, m_projection_matrix);
-	//m_sphere2->Render();
+	UpdateTransformationBuffer(m_sphere2_transform, m_view_matrix, m_projection_matrix);
+	m_sphere2->Render();
 
-	//UpdateTransformationBuffer(m_sphere3_transform, m_view_matrix, m_projection_matrix);
-	//m_sphere3->Render();
+	UpdateTransformationBuffer(m_sphere3_transform, m_view_matrix, m_projection_matrix);
+	m_sphere3->Render();
 }
 
 void OurTestScene::Release()

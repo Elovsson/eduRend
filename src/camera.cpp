@@ -16,7 +16,6 @@ void Camera::Move(const vec3f& direction, const float& rotation) noexcept
 
 void Camera::Rotation(float x, float y) 
 {
-
 	m_rotation = mat4f::rotation(0, -x, -y);
 }
 
