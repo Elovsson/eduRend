@@ -16,3 +16,11 @@ struct TransformationBuffer
 	linalg::mat4f WorldToViewMatrix; //!< Matrix for converting from world space to view space.
 	linalg::mat4f ProjectionMatrix; //!< Matrix for converting from view space to clip cpace.
 };
+struct LightBuffer 
+{
+	linalg::mat4f 
+};
+struct CameraBuffer 
+{
+
+};
