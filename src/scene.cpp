@@ -3,6 +3,7 @@
 #include "QuadModel.h"
 #include "OBJModel.h"
 #include "Cube.h"
+#include <algorithm>
 
 Scene::Scene(
 	ID3D11Device* dxdevice,
@@ -70,6 +71,10 @@ void OurTestScene::Update(
 
 	mousedx += input_handler.GetMouseDeltaX() * mSensitivity * dt;
 	mousedy += input_handler.GetMouseDeltaY() * mSensitivity * dt;
+
+	mousedy = std::clamp(mousedy, -1.5f, 1.5f);
+
+	//std::cout << mousedy << std::endl;
 
 	m_camera->Rotation(mousedx, mousedy);
 
