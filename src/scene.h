@@ -79,7 +79,7 @@ class OurTestScene : public Scene
 	// CBuffer for transformation matrices
 	ID3D11Buffer* m_transformation_buffer = nullptr;
 	// + other CBuffers
-
+	ID3D11Buffer* m_lightCamera_buffer = nullptr;
 	//
 	// Scene content
 	//
@@ -112,11 +112,17 @@ class OurTestScene : public Scene
 	float mSensitivity = 0.1f;
 	float mousedx = 0;
 	float mousedy = 0;
+
+	bool godMode = true;
 	
 
 	void InitTransformationBuffer();
 
 	void UpdateTransformationBuffer(mat4f model_to_world_matrix, mat4f world_to_view_matrix, mat4f projection_matrix);
+
+	void InitLightcamBuffer();
+
+	void UpdateLightCameraBuffer(vec4f lightPosition, vec4f CameraPosition);
 
 public:
 	/**

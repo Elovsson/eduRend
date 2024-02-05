@@ -33,6 +33,7 @@ OurTestScene::OurTestScene(
 {
 	InitTransformationBuffer();
 	// + init other CBuffers
+	InitLightcamBuffer();
 }
 
 //
@@ -47,7 +48,7 @@ void OurTestScene::Init()
 		500.0f);				// z-far plane (everything further will be clipped/removed)
 
 	// Move camera to (0,0,5)
-	m_camera->MoveTo({ 0, 1, 5});
+	m_camera->MoveTo({ 0, 1, 5 });
 
 	// Create objects
 	m_quad = new QuadModel(m_dxdevice, m_dxdevice_context);
@@ -80,13 +81,21 @@ void OurTestScene::Update(
 
 	// Basic camera control
 	if (input_handler.IsKeyPressed(Keys::Up) || input_handler.IsKeyPressed(Keys::W))
-		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt}, mousedx);
+		m_camera->Move({ 0.0f, 0.0f, -m_camera_velocity * dt }, mousedx);
 	if (input_handler.IsKeyPressed(Keys::Down) || input_handler.IsKeyPressed(Keys::S))
-		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt}, mousedx);
+		m_camera->Move({ 0.0f, 0.0f, m_camera_velocity * dt }, mousedx);
 	if (input_handler.IsKeyPressed(Keys::Right) || input_handler.IsKeyPressed(Keys::D))
-		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f}, mousedx);
+		m_camera->Move({ m_camera_velocity * dt, 0.0f, 0.0f }, mousedx);
 	if (input_handler.IsKeyPressed(Keys::Left) || input_handler.IsKeyPressed(Keys::A))
-		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f}, mousedx);
+		m_camera->Move({ -m_camera_velocity * dt, 0.0f, 0.0f }, mousedx);
+
+	if (godMode)
+	{
+		if (input_handler.IsKeyPressed(Keys::Space))
+			m_camera->Move({ 0.0f , m_camera_velocity * dt, 0.0f }, mousedx);
+		if (input_handler.IsKeyPressed(Keys::Ctrl))
+			m_camera->Move({ 0.0f , -m_camera_velocity * dt, 0.0f }, mousedx);
+	}
 
 
 	// Now set/update object transformations
@@ -112,7 +121,7 @@ void OurTestScene::Update(
 
 
 	m_sphere1_transform = mat4f::translation(0, 0, -5) *
-		mat4f::rotation(m_angle , 0.0f, 1.0f, 0.0f) *
+		mat4f::rotation(m_angle, 0.0f, 1.0f, 0.0f) *
 		mat4f::scaling(1, 1, 1);
 
 	m_sphere2_transform = m_sphere1_transform * mat4f::translation(3, 0, 0) *
@@ -148,6 +157,8 @@ void OurTestScene::Render()
 	// Obtain the matrices needed for rendering from the camera
 	m_view_matrix = m_camera->WorldToViewMatrix();
 	m_projection_matrix = m_camera->ProjectionMatrix();
+
+	UpdateLightCameraBuffer({ 0.0f, 0.0f, 0.0f, 0.0f }, m_camera->GetCamPosition());
 
 	//// Load matrices + the Quad's transformation to the device and render it
 	//UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);
@@ -216,4 +227,31 @@ void OurTestScene::UpdateTransformationBuffer(
 	matrixBuffer->WorldToViewMatrix = WorldToViewMatrix;
 	matrixBuffer->ProjectionMatrix = ProjectionMatrix;
 	m_dxdevice_context->Unmap(m_transformation_buffer, 0);
+}
+
+void OurTestScene::InitLightcamBuffer()
+{
+
+	HRESULT hr;
+	D3D11_BUFFER_DESC matrixBufferDesc = { 0 };
+	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+	matrixBufferDesc.ByteWidth = sizeof(LightCameraBuffer);
+	matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	matrixBufferDesc.MiscFlags = 0;
+	matrixBufferDesc.StructureByteStride = 0;
+	ASSERT(hr = m_dxdevice->CreateBuffer(&matrixBufferDesc, nullptr, &m_lightCamera_buffer));
+}
+
+void OurTestScene::UpdateLightCameraBuffer(
+	vec4f lightPosition,
+	vec4f cameraPosition)
+{
+	D3D11_MAPPED_SUBRESOURCE resource;
+	m_dxdevice_context->Map(m_lightCamera_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+	LightCameraBuffer* matrixBuffer = (LightCameraBuffer*)resource.pData;
+	matrixBuffer->lightPosition = lightPosition;
+	matrixBuffer->cameraPosition = cameraPosition;
+	m_dxdevice_context->Unmap(m_lightCamera_buffer, 0);
+
 }

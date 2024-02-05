@@ -14,9 +14,14 @@ void Camera::Move(const vec3f& direction, const float& rotation) noexcept
 	m_position += fwd.xyz();
 }
 
-void Camera::Rotation(float x, float y) 
+void Camera::Rotation(float x, float y)
 {
 	m_rotation = mat4f::rotation(0, -x, -y);
+}
+
+vec4f Camera::GetCamPosition()
+{
+	return m_position.xyz1();
 }
 
 mat4f Camera::WorldToViewMatrix() const noexcept

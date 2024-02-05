@@ -47,6 +47,7 @@ public:
 	void Rotation(float x, float y);
 
 
+
 	inline void SetAspect(float aspect_ratio) noexcept { m_aspect_ratio = aspect_ratio; }
 
 	/**
@@ -62,6 +63,8 @@ public:
 	 * @note In a performance sensitive situation this matrix should be precomputed if possible
 	*/
 	linalg::mat4f ProjectionMatrix() const noexcept;
+
+	linalg::vec4f GetCamPosition();
 
 private:
 	// Aperture attributes
