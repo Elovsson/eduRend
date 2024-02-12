@@ -80,6 +80,7 @@ class OurTestScene : public Scene
 	ID3D11Buffer* m_transformation_buffer = nullptr;
 	// + other CBuffers
 	ID3D11Buffer* m_lightCamera_buffer = nullptr;
+	ID3D11Buffer* m_material_buffer = nullptr;
 	//
 	// Scene content
 	//
@@ -123,6 +124,10 @@ class OurTestScene : public Scene
 	void InitLightcamBuffer();
 
 	void UpdateLightCameraBuffer(vec4f lightPosition, vec4f CameraPosition);
+
+	void InitMaterialBuffer();
+
+	void UpdateMaterialBuffer(float4 specular, float4 diffuse, float4 ambient, float shininess);
 
 public:
 	/**
