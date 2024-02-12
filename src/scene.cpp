@@ -34,6 +34,7 @@ OurTestScene::OurTestScene(
 	InitTransformationBuffer();
 	// + init other CBuffers
 	InitLightcamBuffer();
+	InitMaterialBuffer();
 }
 
 //
@@ -153,12 +154,15 @@ void OurTestScene::Render()
 {
 	// Bind transformation_buffer to slot b0 of the VS
 	m_dxdevice_context->VSSetConstantBuffers(0, 1, &m_transformation_buffer);
+	m_dxdevice_context->PSSetConstantBuffers(0, 1, &m_lightCamera_buffer);
+	m_dxdevice_context->PSSetConstantBuffers(1, 1, &m_material_buffer);
 
 	// Obtain the matrices needed for rendering from the camera
 	m_view_matrix = m_camera->WorldToViewMatrix();
 	m_projection_matrix = m_camera->ProjectionMatrix();
 
 	UpdateLightCameraBuffer({ 0.0f, 0.0f, 0.0f, 0.0f }, m_camera->GetCamPosition());
+	UpdateMaterialBuffer(float4(100, 100, 100, 1), float4(255, 255, 255, 0), float4(255, 0, 0, 0), 10.0f);
 
 	//// Load matrices + the Quad's transformation to the device and render it
 	//UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);
@@ -188,6 +192,8 @@ void OurTestScene::Release()
 	SAFE_DELETE(m_camera);
 
 	SAFE_RELEASE(m_transformation_buffer);
+	SAFE_RELEASE(m_lightCamera_buffer);
+	SAFE_RELEASE(m_material_buffer);
 	// + release other CBuffers
 }
 
@@ -275,7 +281,7 @@ void OurTestScene::UpdateMaterialBuffer(float4 specular,
 	float shininess)
 {
 	D3D11_MAPPED_SUBRESOURCE resource;
-	m_dxdevice_context->Map(m_lightCamera_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+	m_dxdevice_context->Map(m_material_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
 	MaterialBuffer* matrixBuffer = (MaterialBuffer*)resource.pData;
 	matrixBuffer->specular = specular;
 	matrixBuffer->diffuse = diffuse;
