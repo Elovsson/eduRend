@@ -1,12 +1,23 @@
 
 Texture2D texDiffuse : register(t0);
 
-struct PSIn
+cbuffer LightCamerBuffer : register(b0)
+{
+	
+}
+
+cbuffer MaterialBuffer : register(b1)
+{
+	
+}
+
+    struct PSIn
 {
 	float4 Pos  : SV_Position;
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;
 };
+
 
 //-----------------------------------------------------------------------------------------
 // Pixel Shader

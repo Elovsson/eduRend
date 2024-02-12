@@ -27,4 +27,5 @@ struct MaterialBuffer
 	linalg::float4 diffuse;
 	linalg::float4 ambient;
 	float shininess;
+	float x;
 };
