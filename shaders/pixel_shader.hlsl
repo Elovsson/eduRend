@@ -38,5 +38,5 @@ float4 PS_main(PSIn input) : SV_Target
 	//	return float4(input.TexCoord, 0, 1);
 
 
-	float4 output = 
+    float4 output;
 }
