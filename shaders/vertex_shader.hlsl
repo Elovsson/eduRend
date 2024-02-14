@@ -20,7 +20,7 @@ struct PSIn
 	float4 Pos  : SV_Position;
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;	
-	float3 PosWorld : POSWORLD;
+	float4 PosWorld : POSWORLD;
 };
 
 //-----------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ PSIn VS_main(VSIn input)
 	output.Pos = mul(MVP, float4(input.Pos, 1));
 	output.Normal = normalize( mul(ModelToWorldMatrix, float4(input.Normal,0)).xyz );
 	output.TexCoord = input.TexCoord;
-	output.PosWorld = ModelToWorldMatrix;
+    output.PosWorld = mul(ModelToWorldMatrix, float4(input.Pos, 1.0f));
 		
 	return output;
 }

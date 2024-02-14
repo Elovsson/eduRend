@@ -20,8 +20,9 @@ struct PSIn
 	float4 Pos  : SV_Position;
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;
-	float3 PosWorld : POSWORLD;
+	float4 PosWorld : POSWORLD;
 };
+
 
 
 //-----------------------------------------------------------------------------------------
@@ -32,11 +33,31 @@ float4 PS_main(PSIn input) : SV_Target
 {
 	// Debug shading #1: map and return normal as a color, i.e. from [-1,1]->[0,1] per component
 	// The 4:th component is opacity and should be = 1
-	return float4(input.Normal * 0.5 + 0.5, 1);
+	//return float4(input.Normal * 0.5 + 0.5, 1);
 
 	// Debug shading #2: map and return texture coordinates as a color (blue = 0)
 	//	return float4(input.TexCoord, 0, 1);
 
+// Calculate normalized vectors
+    float3 lightDir = normalize(lightPosition.xyz - input.PosWorld.xyz);
+    float3 viewDir = normalize(cameraPosition.xyz - input.PosWorld.xyz);
+    float3 normal = normalize(input.Normal);
 
-    float4 output;
+    // Calculate reflection vector
+    float3 reflectDir = reflect(-lightDir, normal);
+
+    // Calculate diffuse reflection
+    float diffuseIntensity = max(0.0, dot(normal, lightDir));
+    float4 diffuseColor = (diffuse / 255) * diffuseIntensity;
+
+
+    // Calculate specular reflection
+    float specularIntensity = pow(max(0.0, dot(reflectDir, viewDir)), shininess);
+    float4 specularColor = (specular / 255) * specularIntensity;
+
+    // Combine ambient, diffuse, and specular
+    float4 ambientColor = (ambient / 255);
+    float4 finalColor = ambientColor + diffuseColor + specularColor;
+
+    return finalColor;
 }
