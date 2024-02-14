@@ -161,7 +161,7 @@ void OurTestScene::Render()
 	m_view_matrix = m_camera->WorldToViewMatrix();
 	m_projection_matrix = m_camera->ProjectionMatrix();
 
-	UpdateLightCameraBuffer({ 0.0f, 0.0f, 0.0f, 0.0f }, m_camera->GetCamPosition());
+	UpdateLightCameraBuffer({ 0.0f, 20.0f, 20.0f, 0.0f }, m_camera->GetCamPosition());
 	UpdateMaterialBuffer(float4(100, 100, 100, 1), float4(255, 255, 255, 0), float4(255, 0, 0, 0), 10.0f);
 
 	//// Load matrices + the Quad's transformation to the device and render it
