@@ -42,22 +42,18 @@ float4 PS_main(PSIn input) : SV_Target
     float3 lightDir = normalize(lightPosition.xyz - input.PosWorld.xyz);
     float3 viewDir = normalize(cameraPosition.xyz - input.PosWorld.xyz);
     float3 normal = normalize(input.Normal);
-
-    // Calculate reflection vector
+	
     float3 reflectDir = reflect(-lightDir, normal);
-
-    // Calculate diffuse reflection
+	
     float diffuseIntensity = max(0.0, dot(normal, lightDir));
     float4 diffuseColor = (diffuse / 255) * diffuseIntensity;
-
-
-    // Calculate specular reflection
+	
     float specularIntensity = pow(max(0.0, dot(reflectDir, viewDir)), shininess);
     float4 specularColor = (specular / 255) * specularIntensity;
-
-    // Combine ambient, diffuse, and specular
+	
     float4 ambientColor = (ambient / 255);
     float4 finalColor = ambientColor + diffuseColor + specularColor;
 
     return finalColor;
+	
 }
