@@ -157,12 +157,13 @@ void OurTestScene::Render()
 	m_dxdevice_context->PSSetConstantBuffers(0, 1, &m_lightCamera_buffer);
 	m_dxdevice_context->PSSetConstantBuffers(1, 1, &m_material_buffer);
 
+
 	// Obtain the matrices needed for rendering from the camera
 	m_view_matrix = m_camera->WorldToViewMatrix();
 	m_projection_matrix = m_camera->ProjectionMatrix();
 
 	UpdateLightCameraBuffer({ 0.0f, 20.0f, 20.0f, 0.0f }, m_camera->GetCamPosition());
-	UpdateMaterialBuffer(float4(100, 100, 100, 1), float4(255, 255, 255, 0), float4(255, 0, 0, 0), 10.0f);
+	UpdateMaterialBuffer(float3(100, 100, 100), float3(255, 255, 255), float3(255, 0, 0), 10.0f);
 
 	//// Load matrices + the Quad's transformation to the device and render it
 	//UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);
@@ -264,10 +265,21 @@ void OurTestScene::UpdateLightCameraBuffer(
 
 void OurTestScene::InitMaterialBuffer()
 {
+	//HRESULT hr;
+	//D3D11_BUFFER_DESC matrixBufferDesc = { 0 };
+	//matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+	//matrixBufferDesc.ByteWidth = sizeof(MaterialBuffer);
+	//matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	//matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	//matrixBufferDesc.MiscFlags = 0;
+	//matrixBufferDesc.StructureByteStride = 0;
+	//ASSERT(hr = m_dxdevice->CreateBuffer(&matrixBufferDesc, nullptr, &m_material_buffer));
+
+
 	HRESULT hr;
 	D3D11_BUFFER_DESC matrixBufferDesc = { 0 };
 	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	matrixBufferDesc.ByteWidth = sizeof(MaterialBuffer);
+	matrixBufferDesc.ByteWidth = sizeof(Material);
 	matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	matrixBufferDesc.MiscFlags = 0;
@@ -275,17 +287,27 @@ void OurTestScene::InitMaterialBuffer()
 	ASSERT(hr = m_dxdevice->CreateBuffer(&matrixBufferDesc, nullptr, &m_material_buffer));
 }
 
-void OurTestScene::UpdateMaterialBuffer(float4 specular,
-	float4 diffuse,
-	float4 ambient,
+void OurTestScene::UpdateMaterialBuffer(float3 specular,
+	float3 diffuse,
+	float3 ambient,
 	float shininess)
 {
+	//D3D11_MAPPED_SUBRESOURCE resource;
+	//m_dxdevice_context->Map(m_material_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+	//MaterialBuffer* matrixBuffer = (MaterialBuffer*)resource.pData;
+	//matrixBuffer->specular = specular;
+	//matrixBuffer->diffuse = diffuse;
+	//matrixBuffer->ambient = ambient;
+	//matrixBuffer->shininess = shininess;
+	//m_dxdevice_context->Unmap(m_material_buffer, 0);
+
+
 	D3D11_MAPPED_SUBRESOURCE resource;
 	m_dxdevice_context->Map(m_material_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
-	MaterialBuffer* matrixBuffer = (MaterialBuffer*)resource.pData;
-	matrixBuffer->specular = specular;
-	matrixBuffer->diffuse = diffuse;
-	matrixBuffer->ambient = ambient;
+	Material* matrixBuffer = (Material*)resource.pData;
+	matrixBuffer->SpecularColour = specular;
+	matrixBuffer->DiffuseColour = diffuse;
+	matrixBuffer->AmbientColour = ambient;
 	matrixBuffer->shininess = shininess;
 	m_dxdevice_context->Unmap(m_material_buffer, 0);
 }

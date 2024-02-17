@@ -127,7 +127,7 @@ class OurTestScene : public Scene
 
 	void InitMaterialBuffer();
 
-	void UpdateMaterialBuffer(float4 specular, float4 diffuse, float4 ambient, float shininess);
+	void UpdateMaterialBuffer(float3 specular, float3 diffuse, float3 ambient, float shininess);
 
 public:
 	/**

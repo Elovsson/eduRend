@@ -15,6 +15,7 @@ cbuffer MaterialBuffer : register(b1)
 	float shininess;
 }
 
+
 struct PSIn
 {
 	float4 Pos  : SV_Position;
