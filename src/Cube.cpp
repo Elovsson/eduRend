@@ -207,6 +207,11 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	m_number_of_indices = (unsigned int)indices.size();
 
+	m_material = Material();
+
+	HRESULT hr = LoadTextureFromFile(dxdevice, "/assets/textures/wood.png", &m_material.DiffuseTexture);
+
+
 }
 void Cube::Render() const {
 

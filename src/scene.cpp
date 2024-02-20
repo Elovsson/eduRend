@@ -141,7 +141,7 @@ void OurTestScene::Update(
 	m_fps_cooldown -= dt;
 	if (m_fps_cooldown < 0.0)
 	{
-		std::cout << "fps " << (int)(1.0f / dt) << std::endl;
+		//std::cout << "fps " << (int)(1.0f / dt) << std::endl;
 		//		printf("fps %i\n", (int)(1.0f / dt));
 		m_fps_cooldown = 2.0;
 	}
@@ -163,7 +163,7 @@ void OurTestScene::Render()
 	m_projection_matrix = m_camera->ProjectionMatrix();
 
 	UpdateLightCameraBuffer({ 0.0f, 20.0f, 20.0f, 0.0f }, m_camera->GetCamPosition());
-	UpdateMaterialBuffer(float3(100, 100, 100), float3(255, 255, 255), float3(255, 0, 0), 10.0f);
+	UpdateMaterialBuffer(float3(100, 100, 100), float3(255, 255, 255), float3(0, 0, 0), 10.0f);
 
 	//// Load matrices + the Quad's transformation to the device and render it
 	//UpdateTransformationBuffer(m_quad_transform, m_view_matrix, m_projection_matrix);

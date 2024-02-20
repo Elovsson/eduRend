@@ -24,6 +24,8 @@ struct PSIn
 	float4 PosWorld : POSWORLD;
 };
 
+SamplerState texSampler : register(s0);
+
 
 
 //-----------------------------------------------------------------------------------------
@@ -38,8 +40,9 @@ float4 PS_main(PSIn input) : SV_Target
 
 	// Debug shading #2: map and return texture coordinates as a color (blue = 0)
 	//	return float4(input.TexCoord, 0, 1);
-
-// Calculate normalized vectors
+	
+    float4 texColor = texDiffuse.Sample(texSampler, input.TexCoord);
+	
     float3 lightDir = normalize(lightPosition.xyz - input.PosWorld.xyz);
     float3 viewDir = normalize(cameraPosition.xyz - input.PosWorld.xyz);
     float3 normal = normalize(input.Normal);
@@ -47,7 +50,7 @@ float4 PS_main(PSIn input) : SV_Target
     float3 reflectDir = reflect(-lightDir, normal);
 	
     float diffuseIntensity = max(0.0, dot(normal, lightDir));
-    float4 diffuseColor = (diffuse / 255) * diffuseIntensity;
+    float4 diffuseColor = (diffuse / 255) * diffuseIntensity * texColor;
 	
     float specularIntensity = pow(max(0.0, dot(reflectDir, viewDir)), shininess);
     float4 specularColor = (specular / 255) * specularIntensity;
