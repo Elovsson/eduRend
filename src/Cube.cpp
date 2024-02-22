@@ -67,16 +67,16 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	
 	//Left
 
-	v0.Position = { 0.5, -0.5f, 0.5f };
+	v0.Position = { 0.5, -0.5f, -0.5f };
 	v0.Normal = { 1, 0, 0 };
 	v0.TexCoord = { 0, 0 };
-	v1.Position = { 0.5, -0.5f, -0.5f };
+	v1.Position = { 0.5, -0.5f, 0.5f };
 	v1.Normal = { 1, 0, 0 };
 	v1.TexCoord = { 0, 1 };
-	v2.Position = { 0.5, 0.5f, 0.5f };
+	v2.Position = { 0.5, 0.5f, -0.5f };
 	v2.Normal = { 1, 0, 0 };
 	v2.TexCoord = { 1, 1 };
-	v3.Position = { 0.5, 0.5f, -0.5f };
+	v3.Position = { 0.5, 0.5f, 0.5f };
 	v3.Normal = { 1, 0, 0 };
 	v3.TexCoord = { 1, 0 };
 
@@ -85,13 +85,13 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	vertices.push_back(v2);
 	vertices.push_back(v3);
 
-	indices.push_back(8);
 	indices.push_back(9);
+	indices.push_back(8);
 	indices.push_back(10);
 
 	indices.push_back(9);
-	indices.push_back(11);
 	indices.push_back(10);
+	indices.push_back(11);
 
 
 	//Right
@@ -209,7 +209,7 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	m_material = Material();
 
-	HRESULT hr = LoadTextureFromFile(dxdevice, "/assets/textures/wood.png", &m_material.DiffuseTexture);
+	HRESULT hr = LoadTextureFromFile(dxdevice,"/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
 
 
 }
@@ -219,6 +219,13 @@ void Cube::Render() const {
 	// Bind our vertex buffer
 	const UINT32 stride = sizeof(Vertex); //  sizeof(float) * 8;
 	const UINT32 offset = 0;
+
+	m_dxdevice_context->PSSetShaderResources(
+		0, // texture slot #
+		1, // bind just one buffer
+		&m_material.DiffuseTexture.TextureView);
+
+
 	m_dxdevice_context->IASetVertexBuffers(0, 1, &m_vertex_buffer, &stride, &offset);
 
 	// Bind our index buffer

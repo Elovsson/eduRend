@@ -32,6 +32,9 @@ protected:
 	ID3D11Buffer* m_vertex_buffer = nullptr; //!< Pointer to gpu side vertex buffer
 	ID3D11Buffer* m_index_buffer = nullptr; //!< Pointer to gpu side index buffer
 
+	ID3D11SamplerState* m_sampler = nullptr;
+
+
 public:
 
 	Material* mtl;

@@ -57,6 +57,23 @@ OBJModel::OBJModel(
 	dxdevice->CreateBuffer(&indexbufferDesc, &indexData, &m_index_buffer);
 	SETNAME(m_index_buffer, "IndexBuffer");
 
+	
+	D3D11_SAMPLER_DESC sampler;
+	sampler.Filter = D3D11_FILTER_ANISOTROPIC;
+	sampler.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampler.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampler.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampler.MipLODBias = 0.0f;
+	sampler.MaxAnisotropy = 16;
+	sampler.ComparisonFunc = D3D11_COMPARISON_LESS;
+	sampler.BorderColor[0] = 0.0f;
+	sampler.BorderColor[1] = 0.0f;
+	sampler.BorderColor[2] = 0.0f;
+	sampler.BorderColor[3] = 1.0f;
+	sampler.MinLOD = -FLT_MAX;
+	sampler.MaxLOD = FLT_MAX;
+	dxdevice->CreateSamplerState(&sampler, &m_sampler);
+
 	// Copy materials from mesh
 	append_materials(mesh->Materials);
 
@@ -91,10 +108,16 @@ void OBJModel::Render() const
 	// Bind vertex buffer
 	const UINT32 stride = sizeof(Vertex);
 	const UINT32 offset = 0;
+
 	m_dxdevice_context->IASetVertexBuffers(0, 1, &m_vertex_buffer, &stride, &offset);
 
 	// Bind index buffer
 	m_dxdevice_context->IASetIndexBuffer(m_index_buffer, DXGI_FORMAT_R32_UINT, 0);
+
+
+	m_dxdevice_context->PSSetSamplers(0, 1, &m_sampler);
+
+	
 
 	// Iterate Drawcalls
 	for (auto& indexRange : m_index_ranges)
@@ -119,4 +142,5 @@ OBJModel::~OBJModel()
 
 		// Release other used textures ...
 	}
+	SAFE_RELEASE(m_sampler)
 }
