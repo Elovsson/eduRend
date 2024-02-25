@@ -209,7 +209,8 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	m_material = Material();
 
-	HRESULT hr = LoadTextureFromFile(dxdevice,"/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
+	//HRESULT hr = LoadTextureFromFile(dxdevice,"/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
+	HRESULT hr = LoadTextureFromFile(dxdevice,"\eduRend\assets\textures\crate.png", &m_material.DiffuseTexture);
 
 
 }
