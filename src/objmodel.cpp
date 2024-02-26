@@ -59,7 +59,8 @@ OBJModel::OBJModel(
 
 	
 	D3D11_SAMPLER_DESC sampler;
-	sampler.Filter = D3D11_FILTER_ANISOTROPIC;
+	//sampler.Filter = D3D11_FILTER_ANISOTROPIC;
+	sampler.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 	sampler.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampler.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampler.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -89,6 +90,7 @@ OBJModel::OBJModel(
 
 			hr = LoadTextureFromFile(
 				dxdevice,
+				dxdevice_context,
 				material.DiffuseTextureFilename.c_str(),
 				&material.DiffuseTexture);
 			std::cout << "\t" << material.DiffuseTextureFilename

@@ -41,7 +41,7 @@ float4 PS_main(PSIn input) : SV_Target
 	// Debug shading #2: map and return texture coordinates as a color (blue = 0)
 	//	return float4(input.TexCoord, 0, 1);
 	
-    float4 texColor = texDiffuse.Sample(texSampler, input.TexCoord);
+    float4 texColor = texDiffuse.Sample(texSampler, input.TexCoord * 10);
 	
     float3 lightDir = normalize(lightPosition.xyz - input.PosWorld.xyz);
     float3 viewDir = normalize(cameraPosition.xyz - input.PosWorld.xyz);
