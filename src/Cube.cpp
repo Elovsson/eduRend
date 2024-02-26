@@ -73,10 +73,10 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	v1.Position = { 0.5, -0.5f, 0.5f };
 	v1.Normal = { 1, 0, 0 };
 	v1.TexCoord = { 0, 1 };
-	v2.Position = { 0.5, 0.5f, -0.5f };
+	v2.Position = { 0.5, 0.5f, 0.5f };
 	v2.Normal = { 1, 0, 0 };
 	v2.TexCoord = { 1, 1 };
-	v3.Position = { 0.5, 0.5f, 0.5f };
+	v3.Position = { 0.5, 0.5f, -0.5f };
 	v3.Normal = { 1, 0, 0 };
 	v3.TexCoord = { 1, 0 };
 
@@ -87,10 +87,10 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	indices.push_back(9);
 	indices.push_back(8);
-	indices.push_back(10);
+	indices.push_back(11);
 
-	indices.push_back(9);
 	indices.push_back(10);
+	indices.push_back(9);
 	indices.push_back(11);
 
 
@@ -129,10 +129,10 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	v1.Position = { 0.5, 0.5f, 0.5f };
 	v1.Normal = { 0, 1, 0 };
 	v1.TexCoord = { 0, 1 };
-	v2.Position = { -0.5, 0.5f, -0.5f };
+	v2.Position = { 0.5, 0.5f, -0.5f };
 	v2.Normal = { 0, 1, 0 };
 	v2.TexCoord = { 1, 1 };
-	v3.Position = { 0.5, 0.5f, -0.5f };
+	v3.Position = { -0.5, 0.5f, -0.5f };
 	v3.Normal = { 0, 1, 0 };
 	v3.TexCoord = { 1, 0 };
 
@@ -143,11 +143,11 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	indices.push_back(16);
 	indices.push_back(17);
-	indices.push_back(18);
+	indices.push_back(19);
 
 	indices.push_back(17);
-	indices.push_back(19);
 	indices.push_back(18);
+	indices.push_back(19);
 
 
 	//Bottom
@@ -157,10 +157,10 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	v1.Position = { 0.5, -0.5f, -0.5f };
 	v1.Normal = { 0, -1, 0 };
 	v1.TexCoord = { 0, 1 };
-	v2.Position = { -0.5, -0.5f, 0.5f };
+	v2.Position = { 0.5, -0.5f, 0.5f };
 	v2.Normal = { 0, -1, 0 };
 	v2.TexCoord = { 1, 1 };
-	v3.Position = { 0.5, -0.5f, 0.5f };
+	v3.Position = { -0.5, -0.5f, 0.5f };
 	v3.Normal = { 0, -1, 0 };
 	v3.TexCoord = { 1, 0 };
 
@@ -171,11 +171,11 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	indices.push_back(20);
 	indices.push_back(21);
-	indices.push_back(22);
+	indices.push_back(23);
 
 	indices.push_back(21);
-	indices.push_back(23);
 	indices.push_back(22);
+	indices.push_back(23);
 
 	// Vertex array descriptor
 	D3D11_BUFFER_DESC vertexbufferDesc{ 0 };
@@ -209,8 +209,8 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	m_material = Material();
 
-	//HRESULT hr = LoadTextureFromFile(dxdevice,"/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
-	HRESULT hr = LoadTextureFromFile(dxdevice,"\eduRend\assets\textures\crate.png", &m_material.DiffuseTexture);
+	HRESULT hr = LoadTextureFromFile(dxdevice,"/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
+	//HRESULT hr = LoadTextureFromFile(dxdevice,"\eduRend\assets\textures\crate.png", &m_material.DiffuseTexture);
 
 
 }
