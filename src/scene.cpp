@@ -60,6 +60,8 @@ void OurTestScene::Init()
 	m_sphere2 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
 	m_sphere3 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
 
+
+
 }
 
 //

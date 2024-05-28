@@ -10,7 +10,7 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	Vertex v0, v1, v2, v3; //Fornt
 	v0.Position = { -0.5, -0.5f, 0.5f };
 	v0.Normal = { 0, 0, 1 };
-	v0.TexCoord = { 0, 0 };
+	v2.TexCoord = { 0, 0 };
 
 	v1.Position = { 0.5, -0.5f, 0.5f };
 	v1.Normal = { 0, 0, 1 };
@@ -18,7 +18,7 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	v2.Position = { 0.5, 0.5f, 0.5f };
 	v2.Normal = { 0, 0, 1 };
-	v2.TexCoord = { 1, 1 };
+	v0.TexCoord = { 1, 1 };
 
 	v3.Position = { -0.5, 0.5f, 0.5f };
 	v3.Normal = { 0, 0, 1 };
@@ -44,13 +44,16 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	v0.Position = { 0.5, -0.5f, -0.5f };
 	v0.Normal = { 0, 0, -1 };
-	v0.TexCoord = { 0, 0 };
+	v2.TexCoord = { 0, 0 };
+
 	v1.Position = { -0.5, -0.5f, -0.5f };
 	v1.Normal = { 0, 0, -1 };
 	v1.TexCoord = { 0, 1 };
+
 	v2.Position = { -0.5, 0.5f, -0.5f };
 	v2.Normal = { 0, 0, -1 };
-	v2.TexCoord = { 1, 1 };
+	v0.TexCoord = { 1, 1 };
+
 	v3.Position = { 0.5, 0.5f, -0.5f };
 	v3.Normal = { 0, 0, -1 };
 	v3.TexCoord = { 1, 0 };
@@ -76,16 +79,19 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	v0.Position = { 0.5, -0.5f, -0.5f };
 	v0.Normal = { 1, 0, 0 };
-	v0.TexCoord = { 0, 0 };
+	v3.TexCoord = { 0, 0 };
+
 	v1.Position = { 0.5, -0.5f, 0.5f };
 	v1.Normal = { 1, 0, 0 };
-	v1.TexCoord = { 0, 1 };
+	v0.TexCoord = { 0, 1 };
+
 	v2.Position = { 0.5, 0.5f, 0.5f };
 	v2.Normal = { 1, 0, 0 };
-	v2.TexCoord = { 1, 1 };
+	v1.TexCoord = { 1, 1 };
+
 	v3.Position = { 0.5, 0.5f, -0.5f };
 	v3.Normal = { 1, 0, 0 };
-	v3.TexCoord = { 1, 0 };
+	v2.TexCoord = { 1, 0 };
 
 	InvertCube(v0, v1, v2, v3);
 
@@ -106,13 +112,16 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Right
 	v0.Position = { -0.5, -0.5f, -0.5f };
 	v0.Normal = { -1, 0, 0 };
-	v0.TexCoord = { 0, 0 };
+	v2.TexCoord = { 0, 0 };
+
 	v1.Position = { -0.5, -0.5f, 0.5f };
 	v1.Normal = { -1, 0, 0 };
 	v1.TexCoord = { 0, 1 };
+
 	v2.Position = { -0.5, 0.5f, 0.5f };
 	v2.Normal = { -1, 0, 0 };
-	v2.TexCoord = { 1, 1 };
+	v0.TexCoord = { 1, 1 };
+
 	v3.Position = { -0.5, 0.5f, -0.5f };
 	v3.Normal = { -1, 0, 0 };
 	v3.TexCoord = { 1, 0 };
@@ -136,13 +145,16 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Top
 	v0.Position = { -0.5, 0.5f, 0.5f };
 	v0.Normal = { 0, 1, 0 };
-	v0.TexCoord = { 0, 0 };
+	v2.TexCoord = { 0, 0 };
+
 	v1.Position = { 0.5, 0.5f, 0.5f };
 	v1.Normal = { 0, 1, 0 };
 	v1.TexCoord = { 0, 1 };
+
 	v2.Position = { 0.5, 0.5f, -0.5f };
 	v2.Normal = { 0, 1, 0 };
-	v2.TexCoord = { 1, 1 };
+	v0.TexCoord = { 1, 1 };
+
 	v3.Position = { -0.5, 0.5f, -0.5f };
 	v3.Normal = { 0, 1, 0 };
 	v3.TexCoord = { 1, 0 };
@@ -166,13 +178,16 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Bottom
 	v0.Position = { -0.5, -0.5f, -0.5f };
 	v0.Normal = { 0, -1, 0 };
-	v0.TexCoord = { 0, 0 };
+	v2.TexCoord = { 0, 0 };
+
 	v1.Position = { 0.5, -0.5f, -0.5f };
 	v1.Normal = { 0, -1, 0 };
 	v1.TexCoord = { 0, 1 };
+
 	v2.Position = { 0.5, -0.5f, 0.5f };
 	v2.Normal = { 0, -1, 0 };
-	v2.TexCoord = { 1, 1 };
+	v0.TexCoord = { 1, 1 };
+
 	v3.Position = { -0.5, -0.5f, 0.5f };
 	v3.Normal = { 0, -1, 0 };
 	v3.TexCoord = { 1, 0 };
@@ -222,11 +237,25 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	m_number_of_indices = (unsigned int)indices.size();
 
-	m_material = Material();
+	//m_material = Material();
 
-	HRESULT hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
-	//HRESULT hr = LoadTextureFromFile(dxdevice,"\eduRend\assets\textures\crate.png", &m_material.DiffuseTexture);
+	//const char* cube_filenames[6] =
+	//{
+	//   "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/posx.png",
+	//   "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/negx.png",
+	//   "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/posy.png",
+	//   "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/negy.png",
+	//   "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/posz.png",
+	//   "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/negz.png"
+	//};
 
+	//HRESULT hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
+	HRESULT hr = LoadTextureFromFile(dxdevice, "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/posx.png", &m_material[0].DiffuseTexture);
+	hr = LoadTextureFromFile(dxdevice, "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/negx.png", &m_material[1].DiffuseTexture);
+	hr = LoadTextureFromFile(dxdevice, "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/posy.png", &m_material[2].DiffuseTexture);
+	hr = LoadTextureFromFile(dxdevice, "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/negy.png", &m_material[3].DiffuseTexture);
+	hr = LoadTextureFromFile(dxdevice, "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/posz.png", &m_material[4].DiffuseTexture);
+	hr = LoadTextureFromFile(dxdevice, "Users/Martin/Documents/GitHub/eduRend/assets/cubemaps/brightday/negz.png", &m_material[5].DiffuseTexture);
 
 }
 void Cube::Render() const {
@@ -236,19 +265,23 @@ void Cube::Render() const {
 	const UINT32 stride = sizeof(Vertex); //  sizeof(float) * 8;
 	const UINT32 offset = 0;
 
-	m_dxdevice_context->PSSetShaderResources(
-		0, // texture slot #
-		1, // bind just one buffer
-		&m_material.DiffuseTexture.TextureView);
-
 
 	m_dxdevice_context->IASetVertexBuffers(0, 1, &m_vertex_buffer, &stride, &offset);
 
 	// Bind our index buffer
 	m_dxdevice_context->IASetIndexBuffer(m_index_buffer, DXGI_FORMAT_R32_UINT, 0);
 
-	// Make the drawcall
-	m_dxdevice_context->DrawIndexed(m_number_of_indices, 0, 0);
+	for (int i = 0; i < 6; ++i)
+	{
+		m_dxdevice_context->PSSetShaderResources(
+			0, // texture slot #
+			1, // bind just one buffer
+			&m_material[0].DiffuseTexture.TextureView);
+
+		// Make the drawcall
+		m_dxdevice_context->DrawIndexed(6, i * 6, 0);
+
+	}
 }
 void Cube::InvertCube(Vertex& v0, Vertex& v1, Vertex& v2, Vertex& v3)
 {

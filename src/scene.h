@@ -81,6 +81,7 @@ class OurTestScene : public Scene
 	// + other CBuffers
 	ID3D11Buffer* m_lightCamera_buffer = nullptr;
 	ID3D11Buffer* m_material_buffer = nullptr;
+
 	//
 	// Scene content
 	//
