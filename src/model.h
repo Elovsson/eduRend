@@ -38,6 +38,11 @@ protected:
 public:
 
 	Material* mtl;
+
+	static void compute_TB(Vertex& v0, Vertex& v1, Vertex& v2);
+
+	static void ComputeTangents(std::vector<uint32_t>& indices, std::vector<Vertex>& vertices);
+
 	/**
 	 * @brief Sets the protected member variables to the input params.
 	 * @param dxdevice ID3D11Device to be used in the model.

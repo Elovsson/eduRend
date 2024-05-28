@@ -21,6 +21,8 @@ struct PSIn
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEX;	
 	float4 PosWorld : POSWORLD;
+    float3 Tangent : TANGENT;
+    float3 Binormal : BINORMAL;
 };
 
 //-----------------------------------------------------------------------------------------
@@ -41,6 +43,8 @@ PSIn VS_main(VSIn input)
 	// Perform transformations and send to output
 	output.Pos = mul(MVP, float4(input.Pos, 1));
 	output.Normal = normalize( mul(ModelToWorldMatrix, float4(input.Normal,0)).xyz );
+    output.Tangent = normalize(mul(ModelToWorldMatrix, float4(input.Tangent, 0)).xyz);
+    output.Binormal = normalize(mul(ModelToWorldMatrix, float4(input.Binormal, 0)).xyz);
 	output.TexCoord = input.TexCoord;
     output.PosWorld = mul(ModelToWorldMatrix, float4(input.Pos, 1.0f));
 		

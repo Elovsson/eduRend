@@ -10,15 +10,23 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	Vertex v0, v1, v2, v3; //Fornt
 	v0.Position = { -0.5, -0.5f, 0.5f };
 	v0.Normal = { 0, 0, 1 };
+	v0.Tangent = { 0,1,0 };
+	//v0.Binormal = { 1,0,0 };
 	v0.TexCoord = { 0, 0 };
 	v1.Position = { 0.5, -0.5f, 0.5f };
 	v1.Normal = { 0, 0, 1 };
+	v1.Tangent = { 0,1,0 };
+	//v1.Binormal = { 1,0,0 };
 	v1.TexCoord = { 0, 1 };
 	v2.Position = { 0.5, 0.5f, 0.5f };
 	v2.Normal = { 0, 0, 1 };
+	v2.Tangent = { 0,1,0 };
+	//v2.Binormal = { 1,0,0 };
 	v2.TexCoord = { 1, 1 };
 	v3.Position = { -0.5, 0.5f, 0.5f };
 	v3.Normal = { 0, 0, 1 };
+	v3.Tangent = { 0,1,0 };
+	//v3.Binormal = { 1,0,0 };
 	v3.TexCoord = { 1, 0 };
 
 	vertices.push_back(v0);
@@ -34,20 +42,28 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	indices.push_back(2);
 	indices.push_back(3);
 
-	
+
 	//Back
 
 	v0.Position = { 0.5, -0.5f, -0.5f };
 	v0.Normal = { 0, 0, -1 };
+	v0.Tangent = { 0,-1,0 };
+	//v0.Binormal = { -1,0,0 };
 	v0.TexCoord = { 0, 0 };
 	v1.Position = { -0.5, -0.5f, -0.5f };
 	v1.Normal = { 0, 0, -1 };
+	v1.Tangent = { 0,-1,0 };
+	//v1.Binormal = { -1,0,0 };
 	v1.TexCoord = { 0, 1 };
 	v2.Position = { -0.5, 0.5f, -0.5f };
 	v2.Normal = { 0, 0, -1 };
+	v2.Tangent = { 0,-1,0 };
+	//v2.Binormal = { -1,0,0 };
 	v2.TexCoord = { 1, 1 };
 	v3.Position = { 0.5, 0.5f, -0.5f };
 	v3.Normal = { 0, 0, -1 };
+	v3.Tangent = { 0,-1,0 };
+	//v3.Binormal = { -1,0,0 };
 	v3.TexCoord = { 1, 0 };
 
 	vertices.push_back(v0);
@@ -64,20 +80,28 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	indices.push_back(7);
 
 
-	
+
 	//Left
 
 	v0.Position = { 0.5, -0.5f, -0.5f };
 	v0.Normal = { 1, 0, 0 };
+	v0.Tangent = { 0, 0,1 };
+	//v0.Binormal = { 0, 1, 0 };
 	v0.TexCoord = { 0, 0 };
 	v1.Position = { 0.5, -0.5f, 0.5f };
 	v1.Normal = { 1, 0, 0 };
+	v1.Tangent = { 0, 0,1 };
+	//v1.Binormal = { 0, 1, 0 };
 	v1.TexCoord = { 0, 1 };
 	v2.Position = { 0.5, 0.5f, 0.5f };
 	v2.Normal = { 1, 0, 0 };
+	v2.Tangent = { 0, 0,1 };
+	//v2.Binormal = { 0, 1, 0 };
 	v2.TexCoord = { 1, 1 };
 	v3.Position = { 0.5, 0.5f, -0.5f };
 	v3.Normal = { 1, 0, 0 };
+	v3.Tangent = { 0, 0,1 };
+	//v3.Binormal = { 0, 1, 0 };
 	v3.TexCoord = { 1, 0 };
 
 	vertices.push_back(v0);
@@ -97,15 +121,23 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Right
 	v0.Position = { -0.5, -0.5f, -0.5f };
 	v0.Normal = { -1, 0, 0 };
+	v0.Tangent = { 0, 0,-1 };
+	//v0.Binormal = { 0, -1, 0 };
 	v0.TexCoord = { 0, 0 };
 	v1.Position = { -0.5, -0.5f, 0.5f };
 	v1.Normal = { -1, 0, 0 };
+	v1.Tangent = { 0, 0,-1 };
+	//v1.Binormal = { 0, -1, 0 };
 	v1.TexCoord = { 0, 1 };
 	v2.Position = { -0.5, 0.5f, 0.5f };
 	v2.Normal = { -1, 0, 0 };
+	v2.Tangent = { 0, 0,-1 };
+	//v2.Binormal = { 0, -1, 0 };
 	v2.TexCoord = { 1, 1 };
 	v3.Position = { -0.5, 0.5f, -0.5f };
 	v3.Normal = { -1, 0, 0 };
+	v3.Tangent = { 0, 0,-1 };
+	//v3.Binormal = { 0, -1, 0 };
 	v3.TexCoord = { 1, 0 };
 
 	vertices.push_back(v0);
@@ -125,15 +157,23 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Top
 	v0.Position = { -0.5, 0.5f, 0.5f };
 	v0.Normal = { 0, 1, 0 };
+	v0.Tangent = { 1 ,0 ,0 };
+	//v0.Binormal = { 0,0,1 };
 	v0.TexCoord = { 0, 0 };
 	v1.Position = { 0.5, 0.5f, 0.5f };
 	v1.Normal = { 0, 1, 0 };
+	v1.Tangent = { 1 ,0 ,0 };
+	//v1.Binormal = { 0,0,1 };
 	v1.TexCoord = { 0, 1 };
 	v2.Position = { 0.5, 0.5f, -0.5f };
 	v2.Normal = { 0, 1, 0 };
+	v2.Tangent = { 1 ,0 ,0 };
+	//v2.Binormal = { 0,0,1 };
 	v2.TexCoord = { 1, 1 };
 	v3.Position = { -0.5, 0.5f, -0.5f };
 	v3.Normal = { 0, 1, 0 };
+	v3.Tangent = { 1 ,0 ,0 };
+	//v3.Binormal = { 0,0,1 };
 	v3.TexCoord = { 1, 0 };
 
 	vertices.push_back(v0);
@@ -153,15 +193,23 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Bottom
 	v0.Position = { -0.5, -0.5f, -0.5f };
 	v0.Normal = { 0, -1, 0 };
+	v0.Tangent = { -1 ,0 ,0 };
+	//v0.Binormal = { 0,0,-1 };
 	v0.TexCoord = { 0, 0 };
 	v1.Position = { 0.5, -0.5f, -0.5f };
 	v1.Normal = { 0, -1, 0 };
+	v1.Tangent = { -1 ,0 ,0 };
+	//v1.Binormal = { 0,0,-1 };
 	v1.TexCoord = { 0, 1 };
 	v2.Position = { 0.5, -0.5f, 0.5f };
 	v2.Normal = { 0, -1, 0 };
+	v2.Tangent = { -1 ,0 ,0 };
+	//v2.Binormal = { 0,0,-1 };
 	v2.TexCoord = { 1, 1 };
 	v3.Position = { -0.5, -0.5f, 0.5f };
 	v3.Normal = { 0, -1, 0 };
+	v3.Tangent = { -1 ,0 ,0 };
+	//v3.Binormal = { 0,0,-1 };
 	v3.TexCoord = { 1, 0 };
 
 	vertices.push_back(v0);
@@ -209,7 +257,7 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 
 	m_material = Material();
 
-	HRESULT hr = LoadTextureFromFile(dxdevice,"/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
+	HRESULT hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
 	//HRESULT hr = LoadTextureFromFile(dxdevice,"\eduRend\assets\textures\crate.png", &m_material.DiffuseTexture);
 
 

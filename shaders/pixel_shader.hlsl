@@ -1,27 +1,30 @@
 
 Texture2D texDiffuse : register(t0);
+Texture2D texNormal : register(t1);
 
 cbuffer LightCamerBuffer : register(b0)
 {
-	float4 cameraPosition;
-	float4 lightPosition;
+    float4 cameraPosition;
+    float4 lightPosition;
 }
 
 cbuffer MaterialBuffer : register(b1)
 {
-	float4 specular;
-	float4 diffuse;
-	float4 ambient;
-	float shininess;
+    float4 specular;
+    float4 diffuse;
+    float4 ambient;
+    float shininess;
 }
 
 
 struct PSIn
 {
-	float4 Pos  : SV_Position;
-	float3 Normal : NORMAL;
-	float2 TexCoord : TEX;
-	float4 PosWorld : POSWORLD;
+    float4 Pos : SV_Position;
+    float3 Normal : NORMAL;
+    float2 TexCoord : TEX;
+    float4 PosWorld : POSWORLD;
+    float3 Tangent : TANGENT;
+    float3 Binormal : BINORMAL;
 };
 
 SamplerState texSampler : register(s0);
@@ -41,11 +44,24 @@ float4 PS_main(PSIn input) : SV_Target
 	// Debug shading #2: map and return texture coordinates as a color (blue = 0)
 	//	return float4(input.TexCoord, 0, 1);
 	
-    float4 texColor = texDiffuse.Sample(texSampler, input.TexCoord * 10);
+    float4 texColor = texDiffuse.Sample(texSampler, input.TexCoord);
 	
     float3 lightDir = normalize(lightPosition.xyz - input.PosWorld.xyz);
     float3 viewDir = normalize(cameraPosition.xyz - input.PosWorld.xyz);
     float3 normal = normalize(input.Normal);
+	
+    int normalWidth, normalHeight;
+    texNormal.GetDimensions(normalWidth, normalHeight);
+    
+    if (normalWidth != 0)
+    {
+        float3 colornormal = texNormal.Sample(texSampler, input.TexCoord).xyz * 2 - 1;
+	
+        float3x3 TBN = transpose(float3x3(input.Tangent, input.Binormal, input.Normal));
+        normal = mul(TBN, colornormal);
+    }
+
+    //return float4(normal * 0.5 + 0.5, 1);
 	
     float3 reflectDir = reflect(-lightDir, normal);
 	
