@@ -23,8 +23,15 @@ void Model::compute_TB(Vertex& v0, Vertex& v1, Vertex& v2)
 	float det = 1.0f / (F.x * G.y - F.y * G.x);
 	const mat2f A = mat2f(G.y, -F.y, -G.x, F.x) * det;
 
-	vec3f T((A.m11 * D.x + A.m12 * E.x), (A.m11 * D.y + A.m12 * E.y), (A.m11 * D.z + A.m12 * E.z));
-	vec3f B((A.m21 * D.x + A.m22 * E.x), (A.m21 * D.y + A.m22 * E.y), (A.m21 * D.z + A.m22 * E.z));
+	vec3f T(
+		(A.m11 * D.x + A.m12 * E.x),
+		(A.m11 * D.y + A.m12 * E.y),
+		(A.m11 * D.z + A.m12 * E.z));
+
+	vec3f B(
+		(A.m21 * D.x + A.m22 * E.x),
+		(A.m21 * D.y + A.m22 * E.y),
+		(A.m21 * D.z + A.m22 * E.z));
 
 	v0.Tangent += T;
 	v1.Tangent += T;

@@ -13,5 +13,7 @@ public:
 	~Cube() {}
 
 	virtual void Render() const;
+
+	void InvertCube(Vertex& v0, Vertex& v1, Vertex& v2, Vertex& v3);
 };
 

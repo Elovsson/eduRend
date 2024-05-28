@@ -100,6 +100,8 @@ OBJModel::OBJModel(
 				<< (SUCCEEDED(hr) ? " - OK" : "- FAILED") << std::endl;
 		}
 
+
+		// + other texture types here - see Material class
 		if (material.NormalTextureFilename.size()) {
 
 			hr = LoadTextureFromFile(
@@ -110,8 +112,6 @@ OBJModel::OBJModel(
 			std::cout << "\t" << material.NormalTextureFilename
 				<< (SUCCEEDED(hr) ? " - OK" : "- FAILED") << std::endl;
 		}
-
-		// + other texture types here - see Material class
 		// ...
 	}
 	std::cout << "Done." << std::endl;
