@@ -1,6 +1,7 @@
 
 Texture2D texDiffuse : register(t0);
 Texture2D texNormal : register(t1);
+TextureCube texCubeMap : register(t2);
 
 cbuffer LightCamerBuffer : register(b0)
 {
@@ -28,6 +29,7 @@ struct PSIn
 };
 
 SamplerState texSampler : register(s0);
+SamplerState cubeMapSampler : register(s1);
 
 
 
@@ -64,6 +66,9 @@ float4 PS_main(PSIn input) : SV_Target
     //return float4(normal * 0.5 + 0.5, 1);
 	
     float3 reflectDir = reflect(-lightDir, normal);
+    
+    float3 reflectVec = reflect(-viewDir, normal);
+    float4 cubeColor = texCubeMap.Sample(cubeMapSampler, reflectVec);
 	
     float diffuseIntensity = max(0.0, dot(normal, lightDir));
     float4 diffuseColor = (diffuse / 255) * diffuseIntensity * texColor;
@@ -72,7 +77,7 @@ float4 PS_main(PSIn input) : SV_Target
     float4 specularColor = (specular / 255) * specularIntensity;
 	
     float4 ambientColor = (ambient / 255);
-    float4 finalColor = ambientColor + diffuseColor + specularColor;
+    float4 finalColor = ambientColor + diffuseColor + specularColor + cubeColor;
 
     return finalColor;
 	

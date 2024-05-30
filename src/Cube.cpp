@@ -145,19 +145,19 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Top
 	v0.Position = { -0.5, 0.5f, 0.5f };
 	v0.Normal = { 0, 1, 0 };
-	v3.TexCoord = { 0, 0 };
+	v0.TexCoord = { 0, 0 };
 
 	v1.Position = { 0.5, 0.5f, 0.5f };
 	v1.Normal = { 0, 1, 0 };
-	v0.TexCoord = { 0, 1 };
+	v3.TexCoord = { 0, 1 };
 
 	v2.Position = { 0.5, 0.5f, -0.5f };
 	v2.Normal = { 0, 1, 0 };
-	v1.TexCoord = { 1, 1 };
+	v2.TexCoord = { 1, 1 };
 
 	v3.Position = { -0.5, 0.5f, -0.5f };
 	v3.Normal = { 0, 1, 0 };
-	v2.TexCoord = { 1, 0 };
+	v1.TexCoord = { 1, 0 };
 
 	InvertCube(v0, v1, v2, v3);
 
@@ -178,19 +178,19 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//Bottom
 	v0.Position = { -0.5, -0.5f, -0.5f };
 	v0.Normal = { 0, -1, 0 };
-	v1.TexCoord = { 0, 0 };
+	v0.TexCoord = { 0, 0 };
 
 	v1.Position = { 0.5, -0.5f, -0.5f };
 	v1.Normal = { 0, -1, 0 };
-	v2.TexCoord = { 0, 1 };
+	v3.TexCoord = { 0, 1 };
 
 	v2.Position = { 0.5, -0.5f, 0.5f };
 	v2.Normal = { 0, -1, 0 };
-	v3.TexCoord = { 1, 1 };
+	v2.TexCoord = { 1, 1 };
 
 	v3.Position = { -0.5, -0.5f, 0.5f };
 	v3.Normal = { 0, -1, 0 };
-	v0.TexCoord = { 1, 0 };
+	v1.TexCoord = { 1, 0 };
 
 	InvertCube(v0, v1, v2, v3);
 
@@ -250,8 +250,8 @@ Cube::Cube(ID3D11Device* dxdevice, ID3D11DeviceContext* dxdevice_context)
 	//};
 
 	//HRESULT hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material.DiffuseTexture);
-	HRESULT hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/cubemaps/brightday/negz.png", &m_material[0].DiffuseTexture);
 	//HRESULT hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/textures/crate.png", &m_material[0].DiffuseTexture);
+	HRESULT hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/cubemaps/brightday/negz.png", &m_material[0].DiffuseTexture);
 	hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/cubemaps/brightday/posz.png", &m_material[1].DiffuseTexture);
 	hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/cubemaps/brightday/posx.png", &m_material[2].DiffuseTexture);
 	hr = LoadTextureFromFile(dxdevice, "/Users/marti/Documents/GitHub/eduRend/assets/cubemaps/brightday/negx.png", &m_material[3].DiffuseTexture);

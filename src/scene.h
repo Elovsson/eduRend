@@ -13,6 +13,7 @@
 #include "Model.h"
 #include "Texture.h"
 #include "buffers.h"
+#include "CubeMap.h"
 
 /**
  * @brief Abstract class defining scene rendering and updating.
@@ -90,6 +91,7 @@ class OurTestScene : public Scene
 	Model* m_quad;
 	Model* m_sponza;
 	Model* m_cube;
+	CubeMap* cm_cubemap;
 
 	Model* m_sphere1;
 	Model* m_sphere2;

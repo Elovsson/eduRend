@@ -54,7 +54,8 @@ void OurTestScene::Init()
 	// Create objects
 	m_quad = new QuadModel(m_dxdevice, m_dxdevice_context);
 	m_sponza = new OBJModel("assets/crytek-sponza/sponza.obj", m_dxdevice, m_dxdevice_context);
-	m_cube = new Cube(m_dxdevice, m_dxdevice_context);
+	//m_cube = new Cube(m_dxdevice, m_dxdevice_context);
+	cm_cubemap = new CubeMap(m_dxdevice, m_dxdevice_context);
 
 	m_sphere1 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
 	m_sphere2 = new OBJModel("assets/sphere/sphere.obj", m_dxdevice, m_dxdevice_context);
@@ -117,10 +118,10 @@ void OurTestScene::Update(
 		mat4f::rotation(fPI / 2, 0.0f, 1.0f, 0.0f) * // Rotate pi/2 radians (90 degrees) around y
 		mat4f::scaling(0.05f);						 // The scene is quite large so scale it down to 5%
 
-	m_cube_transform = mat4f::translation(0, 0, 0) *
+	m_cube_transform = mat4f::translation(m_camera->GetCamPosition().xyz()) *
 		//mat4f::rotation(m_angle, 1.0f, 0.0f, 0.0f) *
 		//mat4f::rotation(m_angle, 0.0f, 0.0f, 1.0f) *
-		mat4f::scaling(1.5, 1.5, 1.5);
+		mat4f::scaling(300, 300, 300);
 
 
 	m_sphere1_transform = mat4f::translation(0, 0, -5) *
@@ -175,8 +176,8 @@ void OurTestScene::Render()
 	UpdateTransformationBuffer(m_sponza_transform, m_view_matrix, m_projection_matrix);
 	m_sponza->Render();
 
-	UpdateTransformationBuffer(m_cube_transform, m_view_matrix, m_projection_matrix);
-	m_cube->Render();
+	//UpdateTransformationBuffer(m_cube_transform, m_view_matrix, m_projection_matrix);
+	//m_cube->Render();
 
 	UpdateTransformationBuffer(m_sphere1_transform, m_view_matrix, m_projection_matrix);
 	m_sphere1->Render();
